@@ -84,7 +84,30 @@ function App() {
                             }
                         }}
                     >
-                        {!isLoading ? "Prever" : <l-ring size="30" color="white"></l-ring>}
+                        {!isLoading ? (
+                            "Prever"
+                        ) : (
+                            <svg className="containerLoader" viewBox="0 0 40 40" height="30" width="30">
+                                <circle
+                                    className="track"
+                                    cx="20"
+                                    cy="20"
+                                    r="17.5"
+                                    pathLength="100"
+                                    strokeWidth="5px"
+                                    fill="none"
+                                />
+                                <circle
+                                    className="car"
+                                    cx="20"
+                                    cy="20"
+                                    r="17.5"
+                                    pathLength="100"
+                                    strokeWidth="5px"
+                                    fill="none"
+                                />
+                            </svg>
+                        )}
                     </button>
                 </main>
             </div>
