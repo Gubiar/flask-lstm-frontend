@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body,
+html {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+#gradient-canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    --gradient-color-1: #53df83;
+    --gradient-color-2: #47d2e9;
+    --gradient-color-3: #3f3f3f;
+    --gradient-color-4: #eeeeee;
+    z-index: 1;
+}
+
+.glass {
+  background: #fff;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border-radius: 10px;
+
+  position: relative;
+  z-index: 20;
+  width: 700px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 3rem 5rem;
+
+  color: #1b1e21;
+}
+
+@media (max-width: 701px) {
+  .glass {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    box-shadow: none;
+  }
+
+  #gradient-canvas {
+    display: none;
+  }
+}
+
+input {
+    display: flex;
+    border: 0px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #1b1e21;
+    padding-left: 20px;
+}
+
+input:focus,
+input:active,
+input:hover {
+    outline: 0px;
+    border: 1px solid #0077b6;
+}
+
+.btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: 0px;
+    background-color: #0077b6;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    margin: 20px 0px 0px 0px;
+    font-size: 1.5rem;
+}
+
+.btn:hover {
+    background-color: #b200ed;
+    cursor: pointer;
+}
+
+.container {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+select {
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+select,
+option {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 170px;
+    background-color: #fff;
+}
+
+option {
+    border: 0px;
+}
