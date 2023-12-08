@@ -1,18 +1,18 @@
 import { Gradient } from "../public/Gradient.js";
 import { useState, useEffect } from "react";
+import "ldrs/ring";
 
 function App() {
     const [input, setInput] = useState("");
     const [retorno, setRetorno] = useState("");
     const [select, setSelect] = useState("5");
     const [modelo, setModelo] = useState("1");
+    const [isLoading, setisLoading] = useState(false);
 
     useEffect(() => {
         const gradient = new Gradient();
         gradient.initGradient("#gradient-canvas");
-	}, []);
-
-
+    }, []);
 
     function handleChangeInput(e) {
         e.preventDefault();
@@ -21,25 +21,26 @@ function App() {
     }
 
     async function handleButton() {
-        console.log('fetch https://flask-lstm.onrender.com/prever-palavra')
-        const response = await fetch('https://flask-lstm.onrender.com/prever-palavra', {
+        setisLoading(true);
+        console.log("fetch https://flask-lstm.onrender.com/prever-palavra");
+        const response = await fetch("https://flask-lstm.onrender.com/prever-palavra", {
             method: "POST",
             mode: "cors",
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
-             body: JSON.stringify({
-                "frase": input,
-                "nPalavra": Number(select),
-                "modelo": Number(modelo)
+            body: JSON.stringify({
+                frase: input,
+                nPalavra: Number(select),
+                modelo: Number(modelo),
             }),
-          });
-          console.log(response)
-          const data = await response.json();
-          setRetorno(data.frasePrevista);
-    }   
+        });
+        setisLoading(false);
+        const data = await response.json();
+        setRetorno(data.frasePrevista);
+    }
 
     return (
         <>
@@ -47,7 +48,12 @@ function App() {
             <div className="container">
                 <main className="glass">
                     <h1>Next Word Prediction using AI 🤖</h1>
-                    <input className="gradient-border" placeholder="Digite aqui" value={input} onChange={handleChangeInput}></input>
+                    <input
+                        className="gradient-border"
+                        placeholder="Digite aqui"
+                        value={input}
+                        onChange={handleChangeInput}
+                    ></input>
                     {retorno.length > 0 && <p>{retorno}</p>}
                     <footer>
                         <div>
@@ -64,11 +70,22 @@ function App() {
                             <span>Modelo treinado</span>
                             <select value={modelo} onChange={(e) => setModelo(e.target.value)}>
                                 <option value="1">Mais rápido (~15seg)</option>
-                                <option value="2" disabled={true}>Mais lento (~300seg)</option>
+                                <option value="2" disabled={true}>
+                                    Mais lento (~300seg)
+                                </option>
                             </select>
                         </div>
                     </footer>
-                    <button className="btn" onClick={handleButton}>Prever </button>
+                    <button
+                        className="btn"
+                        onClick={() => {
+                            if (!isLoading) {
+                                handleButton();
+                            }
+                        }}
+                    >
+                        {!isLoading ? "Prever" : <l-ring size="30" color="white"></l-ring>}
+                    </button>
                 </main>
             </div>
         </>
